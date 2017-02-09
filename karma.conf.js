@@ -9,15 +9,18 @@ module.exports = function (config) {
       './test/mocks.js',
       './test/spec/**/*.spec.js'
     ],
+    reporters: ['progress', 'coverage'],
     preprocessors: {
       '**/src/**/*.js': ['coverage']
     },
     coverageReporter: {
-      type : 'html',
-      dir : './test/coverage/'
+      dir: './test/coverage',
+      reporters: [
+        {type: 'html', subdir: 'html'},
+        {type: 'lcovonly', subdir: 'lcov'}
+      ]
     },
-    reporters: ['progress', 'coverage'],
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

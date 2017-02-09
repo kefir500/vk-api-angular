@@ -2,9 +2,6 @@
   "name": "vk-api-angular",
   "version": "0.1.0",
   "description": "VK Open API AngularJS wrapper",
-  "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
-  },
   "keywords": [
     "vk",
     "api",
@@ -15,6 +12,9 @@
   ],
   "author": "Alexander Gorishnyak",
   "license": "MIT",
+  "scripts": {
+    "test": "karma start"
+  },
   "devDependencies": {
     "angular": "^1.6.1",
     "angular-mocks": "^1.6.1",
@@ -26,6 +26,7 @@
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.0",
     "karma-ie-launcher": "^1.0.0",
