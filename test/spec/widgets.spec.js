@@ -48,4 +48,11 @@ describe('VK widgets', function () {
     $rootScope.$digest();
     expect(VK.Share.button).toHaveBeenCalled();
   }));
+
+  it('warns when using unsupported argument', inject(function () {
+    spyOn(console, 'warn');
+    $compile('<vk-share data-type="nonexistent-type"></vk-share>')($rootScope);
+    $rootScope.$digest();
+    expect(console.warn).toHaveBeenCalled();
+  }));
 });
