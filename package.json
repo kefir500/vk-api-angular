@@ -8,10 +8,19 @@
     "angular",
     "angularjs",
     "openapi",
+    "promise",
     "wrapper"
   ],
-  "author": "Alexander Gorishnyak",
+  "author": "Alexander Gorishnyak <kefir500@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kefir500/vk-api-angular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kefir500/vk-api-angular/issues",
+    "email": "kefir500@gmail.com"
+  },
   "scripts": {
     "test": "karma start"
   },
