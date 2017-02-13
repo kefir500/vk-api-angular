@@ -44,7 +44,7 @@ describe('VK widgets', function () {
 
   it('calls VK.Widgets.ContactUs() Open API method', inject(function () {
     var spy = spyOn(VK.Widgets, 'ContactUs');
-    $compile('<vk-contact></vk-contact>')($rootScope);
+    $compile('<vk-contact-us></vk-contact-us>')($rootScope);
     $rootScope.$digest();
     expect(spy).toHaveBeenCalled();
   }));
