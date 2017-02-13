@@ -9,36 +9,86 @@ VK Open API wrapper for AngularJS.
 - Supports [VK widgets](https://vk.com/dev/sites) via AngularJS directives.
 - Replaces callbacks with promises.
 
-#### VK API (service)
+### VK API (service)
 
-    VKApi.Api.call('users.get').then(
-      function (response) {
-        alert('Hello, ' + response[0].first_name + '!');
-      }
-    );
+```javascript
+VKApi.Api.call('users.get').then(
+  function (response) {
+    alert('Hello, ' + response[0].first_name + '!');
+  }
+);
+```
 
-#### VK Widgets (directives)
+### VK Widgets (directives)
 
-##### VK *Comments* Widget
+#### VK *Allow Messages From Community* Widget
 
-    <vk-comments></vk-comments>
+```xml
+<vk-allow-messages-from-community group-id="ID"></vk-allow-messages-from-community>
+```
 
-##### VK *Community* Widget
+#### VK *Auth* Widget
 
-    <vk-community></vk-community>
+```xml
+<vk-auth></vk-auth>
+```
 
-##### VK *Contact Us* Widget
+#### VK *Comments* Widget
 
-    <vk-contact></vk-contact>
+```xml
+<vk-comments></vk-comments>
+```
 
-##### VK *Like* Widget
+#### VK *Community* Widget
 
-    <vk-like></vk-like>
+```xml
+<vk-community group-id="ID"></vk-community>
+```
 
-##### VK *Post* Widget
+#### VK *Community Messages* Widget
 
-    <vk-post></vk-post>
+```xml
+<vk-community-messages group-id="ID"></vk-community-messages>
+```
 
-##### VK *Share* Widget
+#### VK *Contact Us* Widget
 
-    <vk-share></vk-share>
+```xml
+<vk-contact-us owner-id="ID"></vk-contact-us>
+```
+
+#### VK *Like* Widget
+
+```xml
+<vk-like></vk-like>
+```
+
+#### VK *Poll* Widget
+
+```xml
+<vk-poll></vk-post>
+```
+
+#### VK *Post* Widget
+
+```xml
+<vk-post owner-id="ID" post-id="POST" hash="HASH"></vk-post>
+```
+
+#### VK *Recommended* Widget
+
+```xml
+<vk-recommended></vk-recommended>
+```
+
+#### VK *Share* Widget
+
+```xml
+<vk-share></vk-share>
+```
+
+#### VK *Subscribe* Widget
+
+```xml
+<vk-subscribe owner-id="ID"></vk-subscribe>
+```
