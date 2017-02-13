@@ -39,12 +39,18 @@ var VK = {
   },
 
   Widgets: {
+    AllowMessagesFromCommunity: function (element_id, options) {},
+    Auth: function (element_id, options) {},
     Comments: function (element_id, options) {},
     Community: function (element_id, options) {},
+    CommunityMessages: function (element_id, options) {},
     ContactUs: function (element_id, options) {},
     Like: function (element_id, options) {},
+    Poll: function (element_id, options) {},
     Post: function (element_id, options) {},
-    Share: function (element_id, options) {}
+    Recommended: function (element_id, options) {},
+    Share: function (element_id, options) {},
+    Subscribe: function (element_id, options) {}
   },
 
   Share: {
