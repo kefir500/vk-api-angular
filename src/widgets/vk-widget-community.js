@@ -1,10 +1,10 @@
 angular.module('vk-api-angular').directive('vkCommunity', function () {
   return {
     restrict: 'AEC',
-    template: '<div data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget--community" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
-      scope.id = attrs.elementId || 'vk-widget-' + scope.$id + '--community';
+      scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
       VK.Widgets.Community(scope.id, {
         width: attrs.width,
         height: attrs.height,
