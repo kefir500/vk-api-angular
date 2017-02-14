@@ -40,10 +40,24 @@ var VK = {
 
   Widgets: {
     AllowMessagesFromCommunity: function (element_id, options) {},
-    Auth: function (element_id, options) {},
+    Auth: function (element_id, options) {
+      if (options) {
+        if (options.onAuth) {
+          options.onAuth();
+        } else if (options.authUrl) {
+          VK.Test.redirect(options.authUrl);
+        }
+      }
+    },
     Comments: function (element_id, options) {},
     Community: function (element_id, options) {},
-    CommunityMessages: function (element_id, options) {},
+    CommunityMessages: function (element_id, groupId, options) {
+      if (VK.Test.error) {
+        if (options && options.onCanNotWrite) {
+          options.onCanNotWrite();
+        }
+      }
+    },
     ContactUs: function (element_id, options) {},
     Like: function (element_id, options) {},
     Poll: function (element_id, options) {},
@@ -59,6 +73,9 @@ var VK = {
 
   Test: {
     error: false,
+    redirect: function (url) {
+      window.location = url;
+    },
     methods: [
       'account.banUser',
       'account.changePassword',

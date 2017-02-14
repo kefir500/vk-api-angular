@@ -91,10 +91,35 @@ describe('VK widgets', function () {
     expect(spy).toHaveBeenCalled();
   }));
 
-  it('warns when using unsupported argument', inject(function () {
-    spyOn(console, 'warn');
+  it('calls onAuth() callback', inject(function () {
+    $rootScope.callback = function () {};
+    var spy = spyOn($rootScope, 'callback');
+    $compile('<vk-auth on-auth="callback()"></vk-auth>')($rootScope);
+    $rootScope.$digest();
+    expect(spy).toHaveBeenCalled();
+  }));
+
+  it('redirects if no callback is passed', inject(function () {
+    $rootScope.callback = function () {};
+    var spy = spyOn(VK.Test, 'redirect');
+    var redirectUrl = 'http://google.com';
+    $compile('<vk-auth auth-url="' + redirectUrl + '"></vk-auth>')($rootScope);
+    $rootScope.$digest();
+    expect(spy).toHaveBeenCalledWith(redirectUrl);
+  }));
+
+  it('calls onCanNotWrite() callback', inject(function () {
+    $rootScope.callback = function () {};
+    var spy = spyOn($rootScope, 'callback');
+    $compile('<vk-community-messages on-can-not-write="callback()"></vk-community-messages>')($rootScope);
+    $rootScope.$digest();
+    expect(spy).toHaveBeenCalled();
+  }));
+
+  it('warns when unsupported argument is passed', inject(function () {
+    var spy = spyOn(console, 'warn');
     $compile('<vk-share data-type="nonexistent-type"></vk-share>')($rootScope);
     $rootScope.$digest();
-    expect(console.warn).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   }));
 });
