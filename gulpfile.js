@@ -7,7 +7,7 @@ var rename = require('gulp-rename');
 gulp.task('default', ['scripts']);
 
 gulp.task('scripts', function () {
-  gulp.src('src/**/*.js')
+  return gulp.src('src/**/*.js')
       .pipe(concat('vk-api-angular.js'))
       .pipe(iife())
       .pipe(gulp.dest('dist/'))
