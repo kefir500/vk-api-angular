@@ -107,8 +107,16 @@ describe('VK widget', function () {
   });
 
   describe('"Post"', function () {
+
     it('calls VK.Widgets.Post() Open API method', inject(function () {
       var spy = spyOn(VK.Widgets, 'Post');
+      $compile('<vk-post hash="hash"></vk-post>')($rootScope);
+      $rootScope.$digest();
+      expect(spy).toHaveBeenCalled();
+    }));
+
+    it('warns when the "hash" attribute is missing', inject(function () {
+      var spy = spyOn(console, 'warn');
       $compile('<vk-post></vk-post>')($rootScope);
       $rootScope.$digest();
       expect(spy).toHaveBeenCalled();
