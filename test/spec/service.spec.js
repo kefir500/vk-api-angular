@@ -12,7 +12,7 @@ describe('VK API wrapper', function () {
 
   it('calls VK.init()', function () {
     spyOn(VK, 'init');
-    VKApi.init(0);
+    VKApi.init({});
     expect(VK.init).toHaveBeenCalled();
   });
 
@@ -44,6 +44,18 @@ describe('VK API wrapper', function () {
     spyOn(VK.Auth, 'getSession');
     VKApi.Auth.getSession();
     expect(VK.Auth.getSession).toHaveBeenCalled();
+  });
+
+  it('handles object as an initialization argument', function () {
+    spyOn(VK, 'init');
+    VKApi.init({apiId: 1});
+    expect(VK.init).toHaveBeenCalledWith({apiId: 1});
+  });
+
+  it('handles ID number as an initialization argument', function () {
+    spyOn(VK, 'init');
+    VKApi.init(1);
+    expect(VK.init).toHaveBeenCalledWith({apiId: 1});
   });
 
   it('sets a single access permission', function () {

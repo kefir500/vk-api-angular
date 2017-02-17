@@ -4,10 +4,12 @@ app.factory('VKApi', function ($q, $timeout) {
 
   return {
 
-    init: function (id) {
-      VK.init({
-        apiId: id
-      });
+    init: function (auth) {
+      if (typeof auth === 'object') {
+        VK.init(auth);
+      } else {
+        VK.init({apiId: auth});
+      }
     },
 
     Auth: {
