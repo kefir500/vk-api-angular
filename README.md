@@ -14,7 +14,7 @@ VK Open API wrapper for AngularJS.
 ```javascript
 VKApi.Api.call('users.get').then(
   function (response) {
-    alert('Hello, ' + response[0].first_name + '!');
+    alert('Hello, ' + response[0].first_name);
   }
 );
 ```
@@ -66,7 +66,7 @@ VKApi.Api.call('users.get').then(
 #### VK *Poll* Widget
 
 ```xml
-<vk-poll></vk-post>
+<vk-poll poll-id="POLL"></vk-poll>
 ```
 
 #### VK *Post* Widget
