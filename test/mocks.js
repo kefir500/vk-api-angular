@@ -43,7 +43,7 @@ var VK = {
     Auth: function (element_id, options) {
       if (options) {
         if (options.onAuth) {
-          options.onAuth();
+          options.onAuth({});
         } else if (options.authUrl) {
           VK.Test.redirect(options.authUrl);
         }
@@ -54,7 +54,7 @@ var VK = {
     CommunityMessages: function (element_id, groupId, options) {
       if (VK.Test.error) {
         if (options && options.onCanNotWrite) {
-          options.onCanNotWrite();
+          options.onCanNotWrite('reason');
         }
       }
     },

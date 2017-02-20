@@ -3,12 +3,12 @@ angular.module('vk-api-angular').directive('vkCommunityMessages', function () {
     restrict: 'AEC',
     template: '<div class="vk-widget--community-messages" data-ng-attr-id="{{::id}}"></div>',
     scope: {
-      onCanNotWrite: '&?'
+      onCanNotWrite: '&'
     },
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
       VK.Widgets.CommunityMessages(scope.id, attrs.groupId, {
-        onCanNotWrite: scope.onCanNotWrite,
+        onCanNotWrite: scope.onCanNotWrite(),
         welcomeScreen: attrs.welcomeScreen,
         expandTimeout: attrs.expandTimeout,
         expanded: attrs.expanded,

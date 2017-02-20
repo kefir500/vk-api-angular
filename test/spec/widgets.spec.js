@@ -28,9 +28,9 @@ describe('VK widget', function () {
     it('calls onAuth() callback', inject(function () {
       $rootScope.callback = function () {};
       var spy = spyOn($rootScope, 'callback');
-      $compile('<vk-auth on-auth="callback()"></vk-auth>')($rootScope);
+      $compile('<vk-auth on-auth="callback"></vk-auth>')($rootScope);
       $rootScope.$digest();
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(jasmine.any(Object));
     }));
 
     it('redirects if no callback is passed', inject(function () {
@@ -73,9 +73,9 @@ describe('VK widget', function () {
     it('calls onCanNotWrite() callback', inject(function () {
       $rootScope.callback = function () {};
       var spy = spyOn($rootScope, 'callback');
-      $compile('<vk-community-messages on-can-not-write="callback()"></vk-community-messages>')($rootScope);
+      $compile('<vk-community-messages on-can-not-write="callback"></vk-community-messages>')($rootScope);
       $rootScope.$digest();
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(jasmine.any(String));
     }));
   });
 
