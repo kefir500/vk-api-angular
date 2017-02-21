@@ -1,7 +1,8 @@
 {
   "name": "vk-api-angular",
-  "version": "0.1.0",
   "description": "VK Open API AngularJS wrapper",
+  "version": "1.0.0",
+  "main": "./dist/vk-api-angular.js",
   "keywords": [
     "vk",
     "api",
@@ -22,7 +23,9 @@
     "email": "kefir500@gmail.com"
   },
   "scripts": {
-    "test": "karma start"
+    "start": "gulp watch",
+    "test": "karma start",
+    "prepublish": "npm test && gulp"
   },
   "devDependencies": {
     "angular": "^1.6.1",
