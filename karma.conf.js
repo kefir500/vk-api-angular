@@ -20,7 +20,7 @@ module.exports = function (config) {
         {type: 'lcovonly', subdir: 'lcov'}
       ]
     },
-    browsers: ['Firefox'],
+    browsers: ['PhantomJS'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
