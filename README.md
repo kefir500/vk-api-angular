@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kefir500/vk-api-angular.svg)](https://travis-ci.org/kefir500/vk-api-angular)
 [![Codecov](https://codecov.io/gh/kefir500/vk-api-angular/coverage.svg)](https://codecov.io/gh/kefir500/vk-api-angular)
+[![devDependencies Status](https://david-dm.org/kefir500/vk-api-angular/dev-status.svg)](https://david-dm.org/kefir500/vk-api-angular?type=dev)
 
 VK Open API wrapper for AngularJS.
 
