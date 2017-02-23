@@ -1,0 +1,33 @@
+{
+  "name": "vk-api-angular",
+  "description": "VK Open API AngularJS wrapper",
+  "main": "./dist/vk-api-angular.js",
+  "authors": [
+    "Alexander Gorishnyak <kefir500@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "vk",
+    "api",
+    "angular",
+    "angularjs",
+    "openapi",
+    "promise",
+    "wrapper"
+  ],
+  "homepage": "https://github.com/kefir500/vk-api-angular",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kefir500/vk-api-angular.git"
+  },
+  "dependencies": {
+    "angular": "^1.6.2"
+  },
+  "ignore": [
+    "**/.*",
+    "/*.js",
+    "/*.json",
+    "/src/",
+    "/test/"
+  ]
+}
