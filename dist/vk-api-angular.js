@@ -3,7 +3,7 @@
 
 var app = angular.module('vk-api-angular', []);
 
-app.factory('VKApi', function ($q, $timeout) {
+app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
 
   return {
 
@@ -102,7 +102,7 @@ app.factory('VKApi', function ($q, $timeout) {
       }
     }
   };
-});
+}]);
 
 module.exports = 'vk-api-angular';
 
