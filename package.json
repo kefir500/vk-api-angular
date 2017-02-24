@@ -2,7 +2,7 @@
   "name": "vk-api-angular",
   "description": "VK Open API AngularJS wrapper",
   "version": "1.0.0",
-  "main": "./dist/vk-api-angular.js",
+  "main": "index.js",
   "keywords": [
     "vk",
     "api",
