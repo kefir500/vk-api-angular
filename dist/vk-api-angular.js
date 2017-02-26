@@ -5,6 +5,8 @@ var app = angular.module('vk-api-angular', []);
 
 app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
 
+  var apiTimeout = 5000;
+
   return {
 
     init: function (auth) {
@@ -85,8 +87,8 @@ app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
       call: function (method, params) {
         return $q(function (resolve, reject) {
           var timeout = $timeout(function () {
-            reject('VK API Angular (VK Api Call): Timeout');
-          }, 5000); // TODO Custom timeout
+            reject('VK API Angular (API Call): Timeout');
+          }, apiTimeout);
           VK.Api.call(method, params || {}, function (r) {
             $timeout.cancel(timeout);
             // istanbul ignore else
@@ -99,6 +101,9 @@ app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
             }
           });
         });
+      },
+      setTimeout: function (value) {
+        apiTimeout = value;
       }
     }
   };
