@@ -5,6 +5,7 @@ describe('VK widget', function () {
   beforeEach(inject(function (_$compile_, _$rootScope_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
+    VK.Test.error = false;
   }));
 
   describe('"Allow Messages from Community"', function () {
@@ -71,6 +72,7 @@ describe('VK widget', function () {
     });
 
     it('calls onCanNotWrite() callback', function () {
+      VK.Test.error = true;
       $rootScope.callback = function () {};
       var spy = spyOn($rootScope, 'callback');
       $compile('<vk-community-messages on-can-not-write="callback"></vk-community-messages>')($rootScope);
