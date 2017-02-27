@@ -2,13 +2,12 @@ describe('VK API wrapper', function () {
 
   beforeEach(module('vk-api-angular'));
 
-  beforeEach(function () {
-    inject(function (_VKApi_, _$rootScope_) {
-      VKApi = _VKApi_;
-      $rootScope = _$rootScope_;
-      VK.Test.error = false;
-    });
-  });
+  beforeEach(inject(function (_VKApi_, _$rootScope_, _$timeout_) {
+    VKApi = _VKApi_;
+    $rootScope = _$rootScope_;
+    $timeout = _$timeout_;
+    VK.Test.error = false;
+  }));
 
   it('calls VK.init()', function () {
     spyOn(VK, 'init');
@@ -162,14 +161,12 @@ describe('VK API wrapper', function () {
   });
 
   it('handles unsuccessful API calls (invalid request)', function (done) {
-    inject(function ($timeout) {
-      VKApi.Api.call('nonexistent.method').then(function () {
-        done.fail('Expected promise to be rejected.');
-      }, function () {
-        done();
-      });
-      $timeout.flush();
-    })();
+    VKApi.Api.call('nonexistent.method').then(function () {
+      done.fail('Expected promise to be rejected.');
+    }, function () {
+      done();
+    });
+    $timeout.flush();
   });
 
   it('handles unsuccessful API calls (invalid response)', function (done) {
