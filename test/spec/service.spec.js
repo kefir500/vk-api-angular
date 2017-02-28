@@ -179,4 +179,14 @@ describe('VK API wrapper', function () {
     $rootScope.$digest();
   });
 
+  it('sets custom timeout for API calls', function (done) {
+    VKApi.Api.setTimeout(5);
+    VKApi.Api.call('nonexistent.method').then(function () {
+      done.fail('Expected promise to be rejected.');
+    }, function () {
+      done();
+    });
+    $timeout.flush(5);
+  });
+
 });
