@@ -109,8 +109,6 @@ app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
   };
 }]);
 
-module.exports = 'vk-api-angular';
-
 angular.module('vk-api-angular').directive('vkAllowMessagesFromCommunity', function () {
   return {
     restrict: 'AEC',

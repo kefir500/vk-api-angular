@@ -105,5 +105,3 @@ app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
     }
   };
 }]);
-
-module.exports = 'vk-api-angular';
