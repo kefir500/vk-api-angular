@@ -1,7 +1,7 @@
 angular.module('vk-api-angular').directive('vkAuth', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--auth" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--auth" data-ng-attr-id="{{::id}}"></div>',
     scope: {
       onAuth: '&'
     },

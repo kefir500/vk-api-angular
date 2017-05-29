@@ -1,7 +1,7 @@
 angular.module('vk-api-angular').directive('vkCommunityMessages', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--community-messages" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--community-messages" data-ng-attr-id="{{::id}}"></div>',
     scope: {
       onCanNotWrite: '&'
     },

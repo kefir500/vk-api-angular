@@ -1,7 +1,7 @@
 angular.module('vk-api-angular').directive('vkComments', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--comments" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--comments" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
