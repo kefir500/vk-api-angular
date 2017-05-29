@@ -23,9 +23,9 @@
     "email": "kefir500@gmail.com"
   },
   "scripts": {
-    "start": "gulp watch",
+    "start": "gulp",
     "test": "karma start",
-    "prepublishOnly": "npm test && gulp"
+    "prepublishOnly": "npm test && gulp build"
   },
   "devDependencies": {
     "angular": "^1.6.4",
