@@ -28,18 +28,18 @@
     "prepublishOnly": "npm test && gulp"
   },
   "devDependencies": {
-    "angular": "^1.6.1",
-    "angular-mocks": "^1.6.1",
+    "angular": "^1.6.4",
+    "angular-mocks": "^1.6.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-iife": "^0.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.1",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.4.1",
+    "gulp-uglify": "^3.0.0",
+    "jasmine-core": "^2.6.2",
+    "karma": "^1.7.0",
     "karma-cli": "^1.0.1",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.2"
+    "karma-phantomjs-launcher": "^1.0.4"
   }
 }
