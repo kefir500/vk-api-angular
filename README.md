@@ -10,17 +10,62 @@ VK Open API wrapper for AngularJS.
 - Supports [VK widgets](https://vk.com/dev/sites) via AngularJS directives.
 - Replaces callbacks with promises.
 
-### VK API (service)
+## VK API (factory)
+
+VKApi factory duplicates the official VK Open API method naming, in particular:
+
+- `VKApi.Api.call`
+- `VKApi.Auth.login`
+- `VKApi.Auth.logout`
+- `VKApi.Auth.revokeGrants`
+- `VKApi.Auth.getLoginStatus`
+- `VKApi.Auth.getSession`
+
+However, the promises are used instead of callbacks. This gives a better control over the success/error handling mechanism.
+
+- [Methods List](https://vk.com/dev/methods)
+- [Permissions List](https://vk.com/dev/permissions)
 
 ```javascript
-VKApi.Api.call('users.get').then(
+// Log in and request the "photos" and "video" permissions.
+// See https://vk.com/dev/permissions for the full permission list.
+
+VKApi.Auth.login({
+  photos: true,
+  video: true
+}).then(
+  // Success:
   function (response) {
-    alert('Hello, ' + response[0].first_name);
+    var name = response.session.user.first_name;
+    alert('Hello, ' + name + '!');
+  },
+  // Error:
+  function (response) {
+    alert('Sorry, access denied.');
+    console.error(response);
   }
 );
 ```
 
-### VK Widgets (directives)
+```javascript
+// Call "users.get" API method.
+// See https://vk.com/dev/methods for the full method list.
+
+VKApi.Api.call('users.get').then(
+  // Success:
+  function (response) {
+    var name = response[0].first_name;
+    alert('Hello, ' + name + '!');
+  },
+  // Error:
+  function (response) {
+    alert('Sorry, could not fetch the user data.');
+    console.error(response);
+  }
+);
+```
+
+## VK Widgets (directives)
 
 #### VK *Allow Messages From Community* Widget
 
