@@ -1,6 +1,8 @@
 describe('VK API wrapper', function () {
 
-  beforeEach(module('vk-api-angular'));
+  beforeEach(module('vk-api-angular', function(_VKApiProvider_) {
+    VKApiProvider = _VKApiProvider_;
+  }));
 
   beforeEach(inject(function (_VKApi_, _$rootScope_, _$timeout_) {
     VKApi = _VKApi_;
@@ -9,9 +11,15 @@ describe('VK API wrapper', function () {
     VK.Test.error = false;
   }));
 
-  it('calls VK.init()', function () {
+  it('calls VK.init() from the factory', function () {
     spyOn(VK, 'init');
     VKApi.init({});
+    expect(VK.init).toHaveBeenCalled();
+  });
+
+  it('calls VK.init() from the provider', function () {
+    spyOn(VK, 'init');
+    VKApiProvider.init({});
     expect(VK.init).toHaveBeenCalled();
   });
 
