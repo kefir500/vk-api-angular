@@ -11,15 +11,16 @@ describe('VK API wrapper', function () {
     VK.Test.error = false;
   }));
 
-  it('calls VK.init() from the factory', function () {
-    spyOn(VK, 'init');
-    VKApi.init({});
-    expect(VK.init).toHaveBeenCalled();
-  });
-
   it('calls VK.init() from the provider', function () {
     spyOn(VK, 'init');
     VKApiProvider.init({});
+    expect(VK.init).toHaveBeenCalled();
+  });
+
+  it('calls VK.init() from the factory', function () {
+    spyOn(VK, 'init');
+    VKApi.init(1);
+    VKApi.init({apiId: 1});
     expect(VK.init).toHaveBeenCalled();
   });
 
@@ -55,13 +56,13 @@ describe('VK API wrapper', function () {
 
   it('handles object as an initialization argument', function () {
     spyOn(VK, 'init');
-    VKApi.init({apiId: 1});
+    VKApiProvider.init({apiId: 1});
     expect(VK.init).toHaveBeenCalledWith({apiId: 1});
   });
 
   it('handles ID number as an initialization argument', function () {
     spyOn(VK, 'init');
-    VKApi.init(1);
+    VKApiProvider.init(1);
     expect(VK.init).toHaveBeenCalledWith({apiId: 1});
   });
 
