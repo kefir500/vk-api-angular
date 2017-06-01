@@ -3,116 +3,128 @@
 
 var app = angular.module('vk-api-angular', []);
 
-app.factory('VKApi', ['$q', '$timeout', function ($q, $timeout) {
+app.provider('VKApi', function () {
 
-  var apiTimeout = 5000;
-
-  return {
-
-    init: function (auth) {
-      if (typeof auth === 'object') {
-        VK.init(auth);
-      } else {
-        VK.init({apiId: auth});
-      }
-    },
-
-    Auth: {
-      login: function (permissions) {
-        var scope = 0;
-        if (permissions) {
-          if (permissions.notify)        { scope += 1; }
-          if (permissions.friends)       { scope += 2; }
-          if (permissions.photos)        { scope += 4; }
-          if (permissions.audio)         { scope += 8; }
-          if (permissions.video)         { scope += 16; }
-          if (permissions.offers)        { scope += 32; console.warn('The "offers" permission is outdated.'); }
-          if (permissions.questions)     { scope += 64; console.warn('The "questions" permission is outdated.'); }
-          if (permissions.pages)         { scope += 128; }
-          if (permissions.links)         { scope += 256; }
-          if (permissions.status)        { scope += 1024; }
-          if (permissions.notes)         { scope += 2048; }
-          if (permissions.messages)      { scope += 4096; console.warn('The "messages" permission is unavailable for non-standalone applications.'); }
-          if (permissions.wall)          { scope += 8192; }
-          if (permissions.ads)           { scope += 32768; }
-          if (permissions.offline)       { scope += 65536; }
-          if (permissions.docs)          { scope += 131072; }
-          if (permissions.groups)        { scope += 262144; }
-          if (permissions.notifications) { scope += 524288; }
-          if (permissions.stats)         { scope += 1048576; }
-          if (permissions.email)         { scope += 4194304; }
-          if (permissions.market)        { scope += 134217728; }
-        }
-        return $q(function (resolve, reject) {
-          VK.Auth.login(function (response) {
-            if (response.session) {
-              resolve(response);
-            } else {
-              reject(response);
-            }
-          }, scope);
-        });
-      },
-      logout: function () {
-        return $q(function (resolve) {
-          VK.Auth.logout(function (response) {
-            resolve(response);
-          });
-        });
-      },
-      revokeGrants: function () {
-        return $q(function (resolve) {
-          VK.Auth.revokeGrants(function (response) {
-            resolve(response);
-          });
-        });
-      },
-      getLoginStatus: function () {
-        return $q(function (resolve, reject) {
-          VK.Auth.getLoginStatus(function (response) {
-            if (response.session) {
-              resolve(response);
-            } else {
-              reject(response);
-            }
-          });
-        });
-      },
-      getSession: function () {
-        return VK.Auth.getSession();
-      }
-    },
-
-    Api: {
-      call: function (method, params) {
-        return $q(function (resolve, reject) {
-          var timeout = $timeout(function () {
-            reject('VK API Angular (API Call): Timeout');
-          }, apiTimeout);
-          VK.Api.call(method, params || {}, function (r) {
-            $timeout.cancel(timeout);
-            // istanbul ignore else
-            if (r.hasOwnProperty('response')) {
-              resolve(r.response);
-            } else if (r.hasOwnProperty('error')) {
-              reject(r.error);
-            } else {
-              reject(r);
-            }
-          });
-        });
-      },
-      setTimeout: function (value) {
-        apiTimeout = value;
-      }
+  this.init = function (auth) {
+    if (typeof auth === 'object') {
+      VK.init(auth);
+    } else {
+      VK.init({apiId: auth});
     }
   };
-}]);
+
+  this.$get = ['$q', '$timeout', function ($q, $timeout) {
+
+    var apiTimeout = 5000;
+
+    return {
+
+      // TODO Remove in major update
+      init: function (auth) {
+        if (typeof auth === 'object') {
+          VK.init(auth);
+        } else {
+          VK.init({apiId: auth});
+        }
+      },
+
+      Auth: {
+        login: function (permissions) {
+          var scope = 0;
+          if (permissions) {
+            if (permissions.notify)        { scope += 1; }
+            if (permissions.friends)       { scope += 2; }
+            if (permissions.photos)        { scope += 4; }
+            if (permissions.audio)         { scope += 8; }
+            if (permissions.video)         { scope += 16; }
+            if (permissions.offers)        { scope += 32; console.warn('The "offers" permission is outdated.'); }
+            if (permissions.questions)     { scope += 64; console.warn('The "questions" permission is outdated.'); }
+            if (permissions.pages)         { scope += 128; }
+            if (permissions.links)         { scope += 256; }
+            if (permissions.status)        { scope += 1024; }
+            if (permissions.notes)         { scope += 2048; }
+            if (permissions.messages)      { scope += 4096; console.warn('The "messages" permission is unavailable for non-standalone applications.'); }
+            if (permissions.wall)          { scope += 8192; }
+            if (permissions.ads)           { scope += 32768; }
+            if (permissions.offline)       { scope += 65536; }
+            if (permissions.docs)          { scope += 131072; }
+            if (permissions.groups)        { scope += 262144; }
+            if (permissions.notifications) { scope += 524288; }
+            if (permissions.stats)         { scope += 1048576; }
+            if (permissions.email)         { scope += 4194304; }
+            if (permissions.market)        { scope += 134217728; }
+          }
+          return $q(function (resolve, reject) {
+            VK.Auth.login(function (response) {
+              if (response.session) {
+                resolve(response);
+              } else {
+                reject(response);
+              }
+            }, scope);
+          });
+        },
+        logout: function () {
+          return $q(function (resolve) {
+            VK.Auth.logout(function (response) {
+              resolve(response);
+            });
+          });
+        },
+        revokeGrants: function () {
+          return $q(function (resolve) {
+            VK.Auth.revokeGrants(function (response) {
+              resolve(response);
+            });
+          });
+        },
+        getLoginStatus: function () {
+          return $q(function (resolve, reject) {
+            VK.Auth.getLoginStatus(function (response) {
+              if (response.session) {
+                resolve(response);
+              } else {
+                reject(response);
+              }
+            });
+          });
+        },
+        getSession: function () {
+          return VK.Auth.getSession();
+        }
+      },
+
+      Api: {
+        call: function (method, params) {
+          return $q(function (resolve, reject) {
+            var timeout = $timeout(function () {
+              reject('VK API Angular (API Call): Timeout');
+            }, apiTimeout);
+            VK.Api.call(method, params || {}, function (r) {
+              $timeout.cancel(timeout);
+              // istanbul ignore else
+              if (r.hasOwnProperty('response')) {
+                resolve(r.response);
+              } else if (r.hasOwnProperty('error')) {
+                reject(r.error);
+              } else {
+                reject(r);
+              }
+            });
+          });
+        },
+        setTimeout: function (value) {
+          apiTimeout = value;
+        }
+      }
+    };
+  }]
+});
 
 angular.module('vk-api-angular').directive('vkAllowMessagesFromCommunity', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--allow-messages-from-community" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--allow-messages-from-community" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -126,7 +138,7 @@ angular.module('vk-api-angular').directive('vkAllowMessagesFromCommunity', funct
 angular.module('vk-api-angular').directive('vkAuth', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--auth" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--auth" data-ng-attr-id="{{::id}}"></div>',
     scope: {
       onAuth: '&'
     },
@@ -144,7 +156,7 @@ angular.module('vk-api-angular').directive('vkAuth', function () {
 angular.module('vk-api-angular').directive('vkComments', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--comments" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--comments" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -165,7 +177,7 @@ angular.module('vk-api-angular').directive('vkComments', function () {
 angular.module('vk-api-angular').directive('vkCommunityMessages', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--community-messages" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--community-messages" data-ng-attr-id="{{::id}}"></div>',
     scope: {
       onCanNotWrite: '&'
     },
@@ -191,7 +203,7 @@ angular.module('vk-api-angular').directive('vkCommunityMessages', function () {
 angular.module('vk-api-angular').directive('vkCommunity', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--community" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--community" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -212,7 +224,7 @@ angular.module('vk-api-angular').directive('vkCommunity', function () {
 angular.module('vk-api-angular').directive('vkContactUs', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--contact-us" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--contact-us" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -227,7 +239,7 @@ angular.module('vk-api-angular').directive('vkContactUs', function () {
 angular.module('vk-api-angular').directive('vkLike', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--like" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--like" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -247,7 +259,7 @@ angular.module('vk-api-angular').directive('vkLike', function () {
 angular.module('vk-api-angular').directive('vkPoll', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--poll" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--poll" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -262,7 +274,7 @@ angular.module('vk-api-angular').directive('vkPoll', function () {
 angular.module('vk-api-angular').directive('vkPost', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--post" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--post" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -279,7 +291,7 @@ angular.module('vk-api-angular').directive('vkPost', function () {
 angular.module('vk-api-angular').directive('vkRecommended', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--recommended" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--recommended" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
@@ -320,7 +332,7 @@ angular.module('vk-api-angular').directive('vkShare', function () {
 angular.module('vk-api-angular').directive('vkSubscribe', function () {
   return {
     restrict: 'AEC',
-    template: '<div class="vk-widget--subscribe" data-ng-attr-id="{{::id}}"></div>',
+    template: '<div class="vk-widget vk-widget--subscribe" data-ng-attr-id="{{::id}}"></div>',
     scope: {},
     link: function (scope, element, attrs) {
       scope.id = attrs.elementId || 'vk-widget-' + scope.$id;
