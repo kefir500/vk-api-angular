@@ -1,6 +1,6 @@
 ### 1.2.0
 
-- Added base CSS class for widgets.
+- Added base class for widgets.
 - Added provider for the configuration phase.
 
 ### 1.1.0
