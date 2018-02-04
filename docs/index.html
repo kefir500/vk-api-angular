@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VK API Angular</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="https://vk.com/js/api/openapi.js"></script>
+	<script type="text/javascript" src="https://vk.com/js/api/share.js"></script><link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicons/32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicons/16x16.png">
+	<link rel="manifest" href="img/favicons/manifest.json">
+	<link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#4e88dd">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+<body data-ng-app="vk-api-angular-demo">
+	<div id="root" data-ng-controller="DemoController">
+		<header>
+			<div class="viewport">
+				<a class="logo" href="/">
+					<img class="logo__image" src="img/logo.png">
+					<span class="logo__text">
+						<span class="text--vk">VK API</span>
+						<span class="text--ng">Angular</span>
+					</span>
+				</a>
+				<span class="external">
+					<a class="external__link" target="_blank" href="https://github.com/kefir500/vk-api-angular">GitHub</a>
+				</span>
+			</div>
+		</header>
+		<main>
+			<div class="viewport">
+				<nav>
+					<h2>General</h2>
+					<ul class="menu">
+						<li class="menu__item">
+							<a data-smooth-scroll href="#quickstart">Getting Started</a>
+							<a data-smooth-scroll href="#api">Open API Methods</a>
+							<a data-smooth-scroll href="#widgets" data-anchor-offset="-58">Widget Directives</a>
+						</li>
+					</ul>
+					<h2>Widgets</h2>
+					<ul class="menu">
+						<li class="menu__item" data-ng-repeat="widget in widgets">
+							<a data-smooth-scroll href="#{{widget.title | underscore}}">
+								{{widget.title}} <span class="text--muted">widget</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<article>
+					<h1>General</h1>
+					<div class="block" id="quickstart">
+						<div class="block__content">
+							<h2 class="text--primary">Getting Started</h2>
+							<p>
+								<b>VK API Angular</b> is a VK Open API and widgets wrapper for AngularJS.
+							</p>
+							<ul>
+								<li>Supports <a target="_blank" href="https://vk.com/dev/methods">VK API methods</a> via AngularJS service.</li>
+								<li>Supports <a target="_blank" href="https://vk.com/dev/sites">VK widgets</a> via AngularJS directives.</li>
+								<li>Replaces callbacks with promises.</li>
+							</ul>
+							<p>
+								Include the official VK API script(s) and the VK API Angular wrapper:
+							</p>
+							<div>
+								<label>
+									<input type="checkbox" data-ng-model="includes.api">
+									I need to make <b>API calls</b>
+								</label><br>
+								<label>
+									<input type="checkbox" data-ng-model="includes.widgets">
+									I need <b>widgets</b>
+								</label><br>
+								<label>
+									<input type="checkbox" data-ng-model="includes.share">
+									I need <b>Share</b> button widget
+								</label>
+							</div>
+<pre><code class="html animation--flash" data-ng-show="(includes.api || includes.widgets) && includes.share">&lt;script type="text/javascript" src="https://vk.com/js/api/openapi.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="https://vk.com/js/api/share.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="vk-api-angular.js">&lt;/script&gt;</code></pre>
+
+<pre><code class="html animation--flash" data-ng-show="(includes.api || includes.widgets) && !includes.share">&lt;script type="text/javascript" src="https://vk.com/js/api/openapi.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="vk-api-angular.js">&lt;/script&gt;</code></pre>
+
+<pre><code class="html animation--flash" data-ng-show="includes.share && !(includes.api || includes.widgets)">&lt;script type="text/javascript" src="https://vk.com/js/api/share.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="vk-api-angular.js">&lt;/script&gt;</code></pre>
+
+<pre><code class="html animation--flash" data-ng-show="!(includes.api || includes.widgets || includes.share)">&lt;!-- Check at least one option --&gt;</code></pre>
+							<p>You may <b>initialize</b> your VK application using the provider during the configuration phase:</p>
+							<pre><code class="javascript">angular.module('my-app', ['vk-api-angular'])
+  .config(function (VKApiProvider) {
+    VKApiProvider.init(10000); // Your VK APP_ID
+  });
+</code></pre>
+						</div>
+					</div>
+					<div class="block" id="api">
+						<div class="block__content">
+							<h2 class="text--primary">Open API Methods</h2>
+							<div>
+								<p>
+									<b>VKApi</b> factory duplicates the official <a target="_blank" href="https://vk.com/dev/openapi">VK Open API</a> method naming, in particular:
+								</p>
+								<ul class="text--monospace">
+									<li>VKApi.Api.call</li>
+									<li>VKApi.Auth.login</li>
+									<li>VKApi.Auth.logout</li>
+									<li>VKApi.Auth.revokeGrants</li>
+									<li>VKApi.Auth.getLoginStatus</li>
+									<li>VKApi.Auth.getSession</li>
+								</ul>
+								<p>
+									However, the promises are used instead of callbacks.
+									This gives a better control over the success/error handling mechanism.
+								</p>
+								<ul>
+									<li><a target="_blank" href="https://vk.com/dev/methods">Methods List</a></li>
+									<li><a target="_blank" href="https://vk.com/dev/permissions">Permissions List</a></li>
+								</ul>
+<pre><code class="javascript">// Log in and request the "photos" and "video" permissions.
+// See https://vk.com/dev/permissions for the full permission list.
+
+VKApi.Auth.login({
+  photos: true,
+  video: true
+}).then(
+  // Success:
+  function (response) {
+    var name = response.session.user.first_name;
+    alert('Hello, ' + name + '!');
+  },
+  // Error:
+  function (response) {
+    alert('Sorry, access denied.');
+    console.error(response);
+  }
+);</code></pre>
+<pre><code class="javascript">// Call "users.get" API method.
+// See https://vk.com/dev/methods for the full method list.
+
+VKApi.Api.call('users.get').then(
+  // Success:
+  function (response) {
+    var name = response[0].first_name;
+    alert('Hello, ' + name + '!');
+  },
+  // Error:
+  function (response) {
+    alert('Sorry, could not fetch the user data.');
+    console.error(response);
+  }
+);</code></pre>
+							</div>
+						</div>
+					</div>
+					<h1 id="widgets">Widgets</h1>
+					<div class="block" data-ng-repeat="widget in widgets">
+						<div class="block__content" id="{{widget.title | underscore}}">
+							<h2>
+								<span class="text--primary">{{widget.title}}</span>
+								<span class="text--muted">Widget</span>
+							</h2>
+							<h3>Example</h3>
+							<div>
+								<div data-ng-if="widget.html">
+									<h6>HTML:</h6>
+									<pre><code class="html">{{widget.html}}</code></pre>
+								</div>
+								<div data-ng-if="widget.js">
+									<h6>JavaScript:</h6>
+									<pre><code class="javascript">{{widget.js}}</code></pre>
+								</div>
+								<p>
+									Check the <b>options</b> section at the <a target="_blank" href="https://vk.com/dev/widget_{{widget.title | underscore}}"><b>VK documentation</b></a> for the full list of parameters.
+								</p>
+							</div>
+							<div data-ng-if="widget.html">
+								<h3>Preview</h3>
+								<div data-compile-html="widget.html"></div>
+								<div data-compile-html="widget.html2"></div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+		</main>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-animate.min.js"></script>
+	<script type="text/javascript" src="js/highlight.js"></script>
+	<script type="text/javascript" src="https://gitcdn.link/repo/kefir500/vk-api-angular/master/dist/vk-api-angular.min.js"></script>
+	<script type="text/javascript" src="demo.js"></script>
+</body>
+</html>
