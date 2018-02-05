@@ -10,6 +10,8 @@ VK Open API wrapper for AngularJS.
 - Supports [VK widgets](https://vk.com/dev/sites) via AngularJS directives.
 - Replaces callbacks with promises.
 
+[Docs & Demo](https://kefir500.github.io/vk-api-angular/)
+
 ## VK API (service)
 
 You may **initialize** your VK application using the provider during the configuration phase:
