@@ -23,11 +23,11 @@
 		<header>
 			<div class="viewport">
 				<a class="logo" href="/">
-					<img class="logo__image" src="img/logo.png">
-					<span class="logo__text">
+					<img class="logo__image" src="img/logo.png" alt="VK API Angular">
+					<h1 class="logo__text">
 						<span class="text--vk">VK API</span>
 						<span class="text--ng">Angular</span>
-					</span>
+					</h1>
 				</a>
 				<span class="external">
 					<a class="external__link" target="_blank" href="https://github.com/kefir500/vk-api-angular">GitHub</a>
@@ -36,8 +36,8 @@
 		</header>
 		<main>
 			<div class="viewport">
-				<nav>
-					<h2>General</h2>
+				<nav class="navigation">
+					<h3>General</h3>
 					<ul class="menu">
 						<li class="menu__item">
 							<a data-smooth-scroll href="#quickstart">Getting Started</a>
@@ -45,7 +45,7 @@
 							<a data-smooth-scroll href="#widgets" data-anchor-offset="-58">Widget Directives</a>
 						</li>
 					</ul>
-					<h2>Widgets</h2>
+					<h3>Widgets</h3>
 					<ul class="menu">
 						<li class="menu__item" data-ng-repeat="widget in widgets">
 							<a data-smooth-scroll href="#{{widget.title | underscore}}">
@@ -55,10 +55,10 @@
 					</ul>
 				</nav>
 				<article>
-					<h1>General</h1>
+					<h2>General</h2>
 					<div class="block" id="quickstart">
 						<div class="block__content">
-							<h2 class="text--primary">Getting Started</h2>
+							<h3 class="text--primary">Getting Started</h3>
 							<p>
 								<b>VK API Angular</b> is a VK Open API and widgets wrapper for AngularJS.
 							</p>
@@ -105,7 +105,7 @@
 					</div>
 					<div class="block" id="api">
 						<div class="block__content">
-							<h2 class="text--primary">Open API Methods</h2>
+							<h3 class="text--primary">Open API Methods</h3>
 							<div>
 								<p>
 									<b>VKApi</b> factory duplicates the official <a target="_blank" href="https://vk.com/dev/openapi">VK Open API</a> method naming, in particular:
@@ -162,14 +162,14 @@ VKApi.Api.call('users.get').then(
 							</div>
 						</div>
 					</div>
-					<h1 id="widgets">Widgets</h1>
+					<h2 id="widgets">Widgets</h2>
 					<div class="block" data-ng-repeat="widget in widgets">
 						<div class="block__content" id="{{widget.title | underscore}}">
-							<h2>
+							<h3>
 								<span class="text--primary">{{widget.title}}</span>
 								<span class="text--muted">Widget</span>
-							</h2>
-							<h3>Example</h3>
+							</h3>
+							<h4>Example</h4>
 							<div>
 								<div data-ng-if="widget.html">
 									<h6>HTML:</h6>
@@ -184,7 +184,7 @@ VKApi.Api.call('users.get').then(
 								</p>
 							</div>
 							<div data-ng-if="widget.html">
-								<h3>Preview</h3>
+								<h4>Preview</h4>
 								<div data-compile-html="widget.html"></div>
 								<div data-compile-html="widget.html2"></div>
 							</div>
